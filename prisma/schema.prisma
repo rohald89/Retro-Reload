@@ -22,9 +22,9 @@ model User {
   image       UserImage?
   password    Password?
   notes       Note[]
-  roles       Role[]
-  sessions    Session[]
-  connections Connection[]
+  roles       Role[] 
+  sessions    Session[] 
+  connections Connection[] // e.g. Google, Facebook, etc.
 }
 
 model Note {
