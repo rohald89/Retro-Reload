@@ -1,10 +1,12 @@
 import { type MetaFunction } from '@remix-run/node'
+import { motion } from 'framer-motion'
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from '#app/components/ui/tooltip.tsx'
+import { useHints } from '#app/utils/client-hints.js'
 import { cn } from '#app/utils/misc.tsx'
 import { logos } from './logos/logos.ts'
 
@@ -28,6 +30,15 @@ const rowClasses: Record<(typeof logos)[number]['row'], string> = {
 }
 
 export default function Index() {
+	const { reducedMotion } = useHints()
+	const motionProps = reducedMotion === 'reduce'
+		? {}
+		: {
+				initial: { opacity: 0, scale: 0.5 },
+				animate: { opacity: 1, scale: 1 },
+				transition: { duration: 0.5 },
+		  }
+
 	return (
 		<main className="font-poppins grid h-full place-items-center">
 			<div className="grid place-items-center px-4 py-16 xl:grid-cols-2 xl:gap-24">
@@ -48,12 +59,12 @@ export default function Index() {
 							></path>
 						</svg>
 					</a>
-					<h1
-						data-heading
-						className="mt-8 animate-slide-top text-4xl font-medium text-foreground [animation-delay:0.3s] [animation-fill-mode:backwards] md:text-5xl xl:mt-4 xl:animate-slide-left xl:text-6xl xl:[animation-delay:0.8s] xl:[animation-fill-mode:backwards]"
-					>
+					<motion.h1
+								{...motionProps}
+								className="text-center text-mega font-extrabold tracking-tight sm:text-8xl lg:text-9xl"
+							>
 						<a href="https://www.epicweb.dev/stack">The Epic Stack</a>
-					</h1>
+					</motion.h1>
 					<p
 						data-paragraph
 						className="mt-6 animate-slide-top text-xl/7 text-muted-foreground [animation-delay:0.8s] [animation-fill-mode:backwards] xl:mt-8 xl:animate-slide-left xl:text-xl/6 xl:leading-10 xl:[animation-delay:1s] xl:[animation-fill-mode:backwards]"

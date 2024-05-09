@@ -7,6 +7,7 @@ import {
 	clientHint as colorSchemeHint,
 	subscribeToSchemeChange,
 } from '@epic-web/client-hints/color-scheme'
+import { clientHint as reducedMotionHint } from '@epic-web/client-hints/reduced-motion'
 import { clientHint as timeZoneHint } from '@epic-web/client-hints/time-zone'
 import { useRevalidator } from '@remix-run/react'
 import * as React from 'react'
@@ -16,6 +17,7 @@ const hintsUtils = getHintUtils({
 	theme: colorSchemeHint,
 	timeZone: timeZoneHint,
 	// add other hints here
+	reducedMotion: reducedMotionHint,
 })
 
 export const { getHints } = hintsUtils
